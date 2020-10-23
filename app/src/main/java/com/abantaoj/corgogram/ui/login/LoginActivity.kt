@@ -15,9 +15,10 @@ import com.parse.SignUpCallback
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var editTextUsername: EditText
-    lateinit var editTextPassword: EditText
-    lateinit var buttonLogin: Button
+    private lateinit var editTextUsername: EditText
+    private lateinit var editTextPassword: EditText
+    private lateinit var buttonLogin: Button
+    private lateinit var buttonSignUp: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +33,18 @@ class LoginActivity : AppCompatActivity() {
         editTextUsername = findViewById(R.id.editTextUsername)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
+        buttonSignUp = findViewById(R.id.buttonSignUp)
 
         buttonLogin.setOnClickListener {
             val username = editTextUsername.text.toString()
             val password = editTextPassword.text.toString()
             login(username, password)
+        }
+
+        buttonSignUp.setOnClickListener {
+            val username = editTextUsername.text.toString()
+            val password = editTextPassword.text.toString()
+            signUp(username, password)
         }
     }
 
@@ -45,21 +53,29 @@ class LoginActivity : AppCompatActivity() {
         user.setPassword(password)
         user.username = username
 
-        user.signUpInBackground(SignUpCallback { e ->
-            if (e == null) {
-                navigateToFeedActivity()
+        ParseUser.logInInBackground(username, password, LogInCallback { _, e ->
+            if (e != null) {
+                Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
+                return@LogInCallback
             }
-        })
 
-//        ParseUser.logInInBackground(username, password, LogInCallback { _, e ->
-//            if (e != null) {
-//
-//                Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
-//                return@LogInCallback
-//            }
-//
-//            navigateToFeedActivity()
-//        })
+            navigateToFeedActivity()
+        })
+    }
+
+    private fun signUp(username: String, password: String) {
+        val user = ParseUser()
+        user.setPassword(password)
+        user.username = username
+
+        user.signUpInBackground(SignUpCallback { e ->
+            if (e != null) {
+                Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
+                return@SignUpCallback
+            }
+
+            navigateToFeedActivity()
+        })
     }
 
     private fun navigateToFeedActivity() {

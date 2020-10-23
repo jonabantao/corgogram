@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.abantaoj.corgogram.R
@@ -32,6 +29,7 @@ class ComposeActivity : AppCompatActivity() {
     private lateinit var previewImageView: ImageView
     private lateinit var postButton: Button
     private lateinit var photoFile: File
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +39,7 @@ class ComposeActivity : AppCompatActivity() {
         captureButton = findViewById(R.id.composeCameraButton)
         previewImageView = findViewById(R.id.composePreviewImageView)
         postButton = findViewById(R.id.composePostButton)
+        progressBar = findViewById(R.id.composeProgressBar)
 
         captureButton.setOnClickListener { launchCamera() }
 
@@ -69,21 +68,25 @@ class ComposeActivity : AppCompatActivity() {
         post.user = currentUser!!
         post.image = ParseFile(photoFile)
 
+        progressBar.visibility = ProgressBar.VISIBLE
+
         post.saveInBackground { e ->
             if (e != null) {
                 Toast.makeText(this, "New Post Failed", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Failure", e)
+                progressBar.visibility = ProgressBar.INVISIBLE
                 return@saveInBackground
             }
 
             Toast.makeText(this, "Post Successful!", Toast.LENGTH_SHORT).show()
+            progressBar.visibility = ProgressBar.INVISIBLE
             startActivity(Intent(this, FeedActivity::class.java))
         }
     }
 
     private fun launchCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = getPhotoFileUri();
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        photoFile = getPhotoFileUri()
         val fileProvider = FileProvider.getUriForFile(this, "com.abantaoj.fileprovider", photoFile)
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
