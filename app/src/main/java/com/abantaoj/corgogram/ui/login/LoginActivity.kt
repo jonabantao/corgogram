@@ -1,14 +1,13 @@
 package com.abantaoj.corgogram.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.abantaoj.corgogram.R
-import com.abantaoj.corgogram.ui.feed.FeedActivity
+import com.abantaoj.corgogram.ui.main.MainActivity
 import com.parse.LogInCallback
 import com.parse.ParseUser
 import com.parse.SignUpCallback
@@ -79,6 +78,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToFeedActivity() {
-        startActivity(Intent(this, FeedActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

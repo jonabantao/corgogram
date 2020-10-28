@@ -6,15 +6,15 @@
         android:id="@+id/actionHome"
         android:icon="@drawable/selector_home"
         android:title="Home"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/actionCompose"
         android:icon="@drawable/selector_compose"
         android:title="Compose"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/actionProfile"
         android:icon="@drawable/selector_profile"
         android:title="Item"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>
