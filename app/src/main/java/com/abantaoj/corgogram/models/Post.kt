@@ -11,6 +11,7 @@ class Post : ParseObject() {
         const val KEY_DESCRIPTION = "KEY_DESCRIPTION"
         const val KEY_IMAGE = "KEY_IMAGE"
         const val KEY_USER = "KEY_USER"
+        const val KEY_CREATED_AT = "createdAt"
     }
 
     var description: String?
