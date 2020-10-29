@@ -9,14 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.abantaoj.corgogram.R
 import com.abantaoj.corgogram.models.Post
+import com.abantaoj.corgogram.utils.TimeFormatterUtils
 import com.bumptech.glide.Glide
 
 class FeedAdapter(private val context: Context, private val posts: MutableList<Post>) :
     RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
-     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var usernameTextView: TextView = itemView.findViewById(R.id.itemFeedUser)
         private var postImageView: ImageView = itemView.findViewById(R.id.itemFeedPhoto)
         private var descriptionTextView: TextView = itemView.findViewById(R.id.itemFeedDescription)
+        private var timestampTextView: TextView = itemView.findViewById(R.id.itemFeedTimeStamp)
 
         fun bind(post: Post) {
             usernameTextView.text = post.user!!.username
@@ -27,6 +29,7 @@ class FeedAdapter(private val context: Context, private val posts: MutableList<P
                     .into(postImageView)
             }
             descriptionTextView.text = post.description
+            timestampTextView.text = TimeFormatterUtils.getTimeDifference(post.createdAt.toString())
         }
     }
 

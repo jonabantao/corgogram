@@ -6,8 +6,16 @@
     android:background="#FFFFFF"
     tools:context=".ui.main.FeedFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentFeedRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/fragmentFeedRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragmentFeedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </FrameLayout>
