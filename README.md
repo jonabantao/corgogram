@@ -32,7 +32,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://imgur.com/a/oKZ4mbT' title='Video Walkthrough' width='295' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/xhwUL8M.gif' title='Video Walkthrough' width='295' alt='Video Walkthrough' />
 
 ## User Stories
 
